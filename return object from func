@@ -1,0 +1,43 @@
+#include<iostream>
+using namespace std;
+
+
+class Student
+{
+private:
+    string name;
+    int id;
+public:
+    Student cng(Student *s)
+    {
+        string k;
+        cin>>k;
+        s->name=k;
+        int l;
+        cin>>l;
+        s->id=l;
+        return *s;
+        
+    }
+    string getname()
+    {
+        return name;
+    }
+    int getid()
+    {
+        return id;
+    }
+};
+
+
+
+
+int main()
+{
+    Student s1;
+    s1.cng(&s1);
+
+    cout<<s1.getname()<<" "<<s1.getid()<<endl;
+
+    return 0;
+}
