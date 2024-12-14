@@ -1,0 +1,380 @@
+#include<iostream>
+#include<string.h>
+#include<math.h>
+#include<cmath>
+
+
+using namespace std;
+
+double pi=M_PI;
+class Rectangle
+{
+private:
+    int length,width;
+    char *color;
+public:
+    Rectangle() : length(0), width(0),color(nullptr) {}   //default constructor without parameters
+    Rectangle(int a,int b,const char *s)  //constructor
+    {
+        this->length=a;
+        this->width=b;
+        //this->color=new string;
+        color=new char[strlen(s)+1];
+        strcpy(color, s);
+    }
+
+const char* getColor()
+    {
+       return color;
+    }
+
+
+int getPerimeter()
+    {
+        return 2*(this->length+this->width);
+    }
+
+int getArea()
+    {
+        return this->length*this->width;
+    }
+const char* setColor(const char *s)       //setter for color
+{
+    delete[] color;
+    color=new char[strlen(s)+1];
+    strcpy(color,s);
+    return color;
+}
+
+    void setl(int l)
+    {
+        this->length=l;
+    }
+    void setw(int w)
+    {
+        this->width=w;
+    }
+
+    //getter
+
+    int getl()
+    {
+        return length;
+    }
+    int getw()
+    {
+        return width;
+    }
+    const char* getc()
+    {
+        return color;
+    }
+
+
+
+
+};
+
+
+
+class Triangle
+{
+private:
+    int a,b,c;
+    char *color;
+public:
+
+    Triangle () : a(0),b(0),c(0),color(nullptr){}  //default constructor
+    Triangle(int x,int y,int z ,const char *s)
+    {
+        this->a=x;
+        this->b=y;
+        this->c=z;
+        color=new char[strlen(s)+1];
+        strcpy(color, s);
+    }
+    int getPerimeter()
+    {
+        return a+b+c;
+    }
+    double getArea()
+    {
+        double s=(a+b+c)/2;
+        return sqrt(s*(s-a)*(s-b)*(s-c));
+    }
+    const char* getColor()
+    {
+       return color;
+    }
+    
+    const char* setColor(const char *s)
+    {
+        delete[] color;
+        color=new char[strlen(s)+1];
+        strcpy(color,s);
+        return color;
+    }
+    void seta(int a)
+    {
+        this->a=a;
+    }
+    void setb(int b)
+    {
+        this->b=b;
+    }
+    void setc(int c)
+    {
+        this->c=c;
+    }
+    int geta()
+    {
+        return a;
+    }
+    int getb()
+    {
+        return b;
+    }
+    int getcc()
+    {
+        return c;
+    }
+
+    
+};
+
+
+
+
+class Circle
+{
+private:
+    int radius;
+    char *color;
+public:
+
+    Circle() : radius(0),color(nullptr) {}
+
+    Circle (int a,const char *s)
+    {
+        radius=a;
+        color=new char[strlen(s)+1];
+        strcpy(color, s);
+        
+    }
+    double getPerimeter()
+    {
+        return 2*pi*radius;
+    }
+    double getArea()
+    {
+        return pi*radius*radius;
+    }
+    const char* getColor()
+    {
+       return color;
+    }
+    int setr(int r)
+    {
+        this->radius=r;
+    }
+    const char* setColor(const char *s)
+    {
+        delete[] color;
+        color=new char[strlen(s)+1];
+        strcpy(color,s);
+        return color;
+    }
+
+    int getr()
+    {
+        return radius;
+    }
+
+
+};
+
+class ShapeCollection
+{
+private:
+    Rectangle rect[100];
+    Triangle tri[100];
+    Circle cir[100];
+    int ir=0,ic=0,it=0;
+public:
+    int getRectCount()
+    {
+        int r;
+        cin>>r;
+        return r;
+    }
+    int getTriCount()
+    {
+        int r;
+        cin>>r;
+
+        return r;
+    }
+    int getCircCount()
+    {
+        int r;
+        cin>>r;
+        return r;
+    }
+
+    void addRectangle(Rectangle* a)
+    {
+        //rect[ir]=*a;
+        
+
+        rect[ir].setl(a->getl());
+        rect[ir].setw(a->getw());
+
+        rect[ir].setColor(a->getColor());
+
+        ir++;
+
+    }
+    void addTriangle(Triangle* a)
+    {
+        //tri[it]=*a;
+
+        tri[it].seta(a->geta());
+        tri[it].setb(a->getb());
+        
+        tri[it].setc(a->getcc());
+        tri[it].setColor(a->getColor());
+        
+
+        it++;
+    }
+    void addCircle(Circle* a)
+    {
+        //cir[ic]=*a;
+        cir[ic].setColor(a->getColor());
+        cir[ic].setr(a->getr());
+
+        ic++;
+    }
+
+    void printRectangles()
+    {
+        for(int i=0;i<ir;i++) 
+        {
+            cout<<"rectangle "<<i<<":"<<"length: "<<rect[i].getl()<<" width: "<<rect[i].getw()<<endl;
+        }
+    }
+    void printTriangles()
+    {
+        for(int i=0;i<ir;i++) 
+        {
+            cout<<"Triangle "<<i<<":"<<"a: "<<tri[i].geta()<<" b: "<<tri[i].getb()<<" c: "<<tri[i].getcc()<<endl;
+        }
+    }
+    void printCircles()
+    {
+        for(int i=0;i<ir;i++) 
+        {
+            cout<<"Circle "<<i<<":"<<"radius: "<<cir[i].getr()<<endl;
+        }
+    }
+};
+
+
+
+
+
+
+
+int main()
+{
+    Rectangle r1(10,20,"Red");
+    cout<<"Rectangle Perimeter: "<<r1.getPerimeter()<<endl;
+    cout<<"Rectangle Area: "<<r1.getArea()<<endl;
+    cout<<"Rectangle Color: "<<r1.getColor()<<endl;
+
+    //cout<<r1.getArea()<<" "<<r1.getPerimeter()<<" "<<r1.getColor()<<endl;
+
+    r1.setColor("Yellow");
+    cout<<"Rectangle Color: "<<r1.getColor()<<endl;
+    cout << "--------------------------------------" << endl;
+    //Rectangle r2(15,15,"black");
+
+    Triangle t1(3,4,5,"Blue");
+    cout << "Triangle Perimeter: " << t1.getPerimeter() << endl;
+    cout << "Triangle Color: " << t1.getColor() << endl;
+    cout << "Triangle Area: " << t1.getArea() << endl;
+    t1.setColor("Orange");
+    cout << "Triangle Color: " << t1.getColor() << endl;
+    cout << "--------------------------------------" << endl;
+
+    Circle c1(7, "Green");
+    cout << "Circle Perimeter: " << c1.getPerimeter() << endl;
+    cout << "Circle Area: " << c1.getArea() << endl;
+    cout << "Circle Color: " << c1.getColor() << endl;
+    c1.setColor("Purple");
+    cout << "Circle Color: " << c1.getColor() << endl;
+    cout << "--------------------------------------" << endl;
+
+
+
+
+    // //Triangle t1(3,4,5,"orange");
+
+    // cout<<t1.getArea()<<" "<<t1.getColor()<<" "<<t1.getPerimeter()<<" "<<endl;
+    // t1.setColor("balck");
+    // cout<<t1.getColor()<<endl;
+
+    // Circle c1(10,"red");
+    // cout<<c1.getArea()<<" "<<c1.getPerimeter()<<" "<<c1.getColor()<<endl;
+
+    // c1.setColor("balck");
+    // cout<<c1.getColor()<<endl;
+
+    ShapeCollection shapes;
+
+    shapes.addRectangle(&r1);
+    shapes.addTriangle(&t1);
+    shapes.addCircle(&c1);
+
+    Rectangle r2(15, 25, "Black");
+    shapes.addRectangle(&r2);
+    Triangle t2(5, 12, 13, "White");
+    shapes.addTriangle(&t2);
+
+
+    cout << "Number of Rectangles: " << shapes.getRectCount() << endl;
+    cout << "Number of Triangles: " << shapes.getTriCount() << endl;
+    cout << "Number of Circles: " << shapes.getCircCount() << endl;
+    cout << "--------------------------------------" << endl;
+
+
+    shapes.printRectangles();
+    shapes.printTriangles();
+    shapes.printCircles();
+    return 0;
+
+
+
+
+
+    // Triangle t2(7,8,9,"red");
+    // shapes.addTriangle(&t1);
+    // shapes.addTriangle(&t2);
+
+    // Circle c2(89,"dark red");
+
+    // shapes.addCircle(&c1);
+    // shapes.addCircle(&c2);
+
+    // cout<<"no of rect "<<shapes.getRectCount()<<endl;
+    // cout<<"no of tri "<<shapes.getTriCount()<<endl;
+    // cout<<"no of tri "<<shapes.getCircCount()<<endl;
+
+     
+    // shapes.printRectangles();
+    // shapes.printTriangles();
+    // shapes.printCircles();
+    
+    
+    
+}
